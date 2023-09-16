@@ -1,0 +1,20 @@
+- name: lab2 playbook - Ziad
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Package cache update
+      apt:
+        update_cache: true
+        name: nginx
+        state: latest
+    
+    - name: Copy index.html to nginx
+      copy:
+        src: ./index.html
+        dest: /var/www/html/index.html
+    
+    - name: Restart Nginx
+      sysvinit:
+        name: nginx
+        state: restarted
+        enabled: yes

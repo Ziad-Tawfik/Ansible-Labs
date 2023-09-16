@@ -1,0 +1,23 @@
+- name: lab2 playbook - Ziad
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      tags:
+        - update
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: latest
+      tags:
+        - install
+
+    - name: Print message  
+      debug:
+        msg: "This task will always run"
+      tags:
+        - always
+

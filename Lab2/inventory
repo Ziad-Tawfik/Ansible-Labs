@@ -1,0 +1,6 @@
+[webserver]
+172.17.0.2
+
+[all:vars]
+package=nginx
+version=latest

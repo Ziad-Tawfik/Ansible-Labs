@@ -1,0 +1,14 @@
+- name: lab2 playbook - Ziad
+  hosts: all
+  gather_facts: false
+  
+  vars:
+    package: nginx
+    version: latest
+
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: "{{package}}"
+        state: "{{version}}"
+
