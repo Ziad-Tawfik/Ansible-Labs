@@ -1,0 +1,27 @@
+- name: lab3 playbook - Ziad
+  hosts: all
+
+  tasks:
+    - name: Install Nginx
+      package:
+        name: nginx
+        state: latest
+      when: "'ubuntu' in ansible_facts.distribution.lower()"
+
+    - name: Install httpd (Apache)
+      package:
+        name: httpd
+        state: latest
+      when: "'centos' in ansible_facts.distribution.lower()"
+
+    - name: Restart Nginx
+      sysvinit:
+        name: nginx
+        state: restarted
+      when: "'ubuntu' in ansible_facts.distribution.lower()"
+
+    - name: Restart httpd (Apache)
+      service:
+        name: httpd
+        state: restarted
+      when: "'centos' in ansible_facts.distribution.lower()"

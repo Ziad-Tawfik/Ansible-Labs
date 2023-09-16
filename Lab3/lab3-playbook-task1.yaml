@@ -1,0 +1,14 @@
+- name: lab3 playbook - Ziad
+  hosts: all
+  gather_facts: false
+  ignore_errors: true
+
+  tasks:
+    - name: Install several packages
+      apt:
+        name: "{{item}}"
+        state: latest
+      loop:
+        - nginx
+        - mariadb-server
+        - curl

@@ -1,0 +1,35 @@
+- name: lab3 playbook - Ziad
+  hosts: all
+  vars:
+    package: "nginx"
+    template_name: ./index.html.j2
+    template_msg: "This is the task 5 in ansible lab 3"
+    file_names:
+      - ./file.css
+      - ./file.js
+
+  tasks:
+    - name: Install the Package
+      apt:
+        name: "{{ package }}"
+        state: latest
+      notify: Copy Files
+    
+    - name: Copy index.html Template
+      template:
+        src: "{{ template_name }}"
+        dest: "/var/www/html/index.html"
+      notify: Restart Service
+
+  handlers:
+    - name: Copy Files
+      copy:
+        src: "{{ item }}"
+        dest: "/var/www/html/{{ item }}"
+      loop: "{{ file_names }}"
+      notify: Restart Service
+    
+    - name: Restart Service
+      sysvinit:
+        name: "{{ package }}"
+        state: restarted

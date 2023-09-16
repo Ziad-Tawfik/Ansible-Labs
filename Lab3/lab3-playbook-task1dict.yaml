@@ -1,0 +1,13 @@
+- name: lab3 playbook - Ziad
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Install and remove packages using loop
+      apt:
+        name: "{{ item.package }}"
+        state: "{{ item.state }}"
+      loop:
+        - { package: "nginx", state: "present" }
+        - { package: "mariadb-server", state: "latest" }
+        - { package: "curl", state: "absent" }

@@ -1,0 +1,29 @@
+- name: lab3 playbook - Ziad
+  hosts: all
+
+  vars:
+    package: "nginx"
+    file_names:
+      - ./index.html
+      - ./file.css
+      - ./file.js
+
+  tasks:
+    - name: Install the Package
+      apt:
+        name: "{{ package }}"
+        state: latest
+      notify: Copy Files
+
+  handlers:
+    - name: Copy Files
+      copy:
+        src: "{{ item }}"
+        dest: "/var/www/html/{{ item }}"
+      loop: "{{ file_names }}"
+      notify: Restart Service
+    
+    - name: Restart Service
+      sysvinit:
+        name: "{{ package }}"
+        state: restarted
