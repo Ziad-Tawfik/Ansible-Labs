@@ -1,0 +1,6 @@
+package: "nginx"
+file_names:
+  - index.html
+  - file.css
+  - file.js
+  

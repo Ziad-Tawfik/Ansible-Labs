@@ -1,0 +1,4 @@
+- name: lab4 playbook task 3 - Ziad
+  hosts: all
+  roles:
+    - web

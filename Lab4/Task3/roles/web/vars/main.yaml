@@ -1,0 +1,6 @@
+package: "nginx"
+file_names:
+  - file.css
+  - file.js
+template_name: index.html.j2
+template_msg: "This is task no. 3 in ansible lab 4"

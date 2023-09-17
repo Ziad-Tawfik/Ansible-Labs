@@ -1,0 +1,5 @@
+- name: Install the Package
+  apt:
+    name: "{{ package }}"
+    state: latest
+  notify: Copy Files

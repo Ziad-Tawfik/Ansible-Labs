@@ -1,0 +1,19 @@
+- name: Install the Package
+  apt:
+    name: "{{ package }}"
+    state: latest
+  register: inst_pkg_res
+
+- name: Copy Files
+  copy:
+    src: "{{ item }}"
+    dest: "/var/www/html/{{ item }}"
+  loop: "{{ file_names }}"
+  when: inst_pkg_res.changed == True
+  register: copy_res
+    
+- name: Restart Service
+  sysvinit:
+    name: "{{ package }}"
+    state: restarted
+  when: copy_res.changed == True

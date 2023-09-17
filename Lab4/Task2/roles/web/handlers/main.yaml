@@ -1,0 +1,11 @@
+- name: Copy Files
+  copy:
+    src: "{{ item }}"
+    dest: "/var/www/html/{{ item }}"
+  loop: "{{ file_names }}"
+  notify: Restart Service
+    
+- name: Restart Service
+  sysvinit:
+    name: "{{ package }}"
+    state: restarted

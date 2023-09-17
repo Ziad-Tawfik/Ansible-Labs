@@ -1,0 +1,4 @@
+- name: lab4 playbook - Ziad
+  hosts: all
+  roles:
+    - web

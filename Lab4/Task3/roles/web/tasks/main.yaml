@@ -1,0 +1,11 @@
+- name: Install the Package
+  apt:
+    name: "{{ package }}"
+    state: latest
+  notify: Copy Files
+
+- name: Copy index.html Template
+  template:
+    src: "{{ template_name }}"
+    dest: "/var/www/html/index.html"
+  notify: Restart Service
